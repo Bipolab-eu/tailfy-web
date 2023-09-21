@@ -7,9 +7,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        'hero-pattern': "url('../public/background.avif')",
-      },
     },
   },
   plugins: [],

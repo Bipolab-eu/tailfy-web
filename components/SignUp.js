@@ -3,7 +3,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from 'yup'
 
-export default function SignUp () {
+export default function SignUp() {
   // const [checked, setChecked] = useState(false)
   // const [step, setStep] = useState(0)
   // const [loading, setLoading] = useState(false)
@@ -78,13 +78,12 @@ export default function SignUp () {
           })
             .then(res => res.json())
             .catch(error => console.error('Error:', error))
-          
-          resetForm()
+            resetForm()
         }
       }
     >
       <section
-       className="bg-white p-8 grid gap-4"
+        className="bg-white p-8 grid gap-4"
       >
         <h1 className="text-3xl text-center">Tailfy</h1>
         <Form
