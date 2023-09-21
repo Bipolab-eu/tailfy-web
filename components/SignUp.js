@@ -65,20 +65,29 @@ export default function SignUp() {
 
       onSubmit={
         async (values, { resetForm }) => {
-          await fetch(`${process.env.API_URL}/api/auth/local/register`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              username: values.username,
-              email: values.email,
-              password: values.password
+          try {
+            const response = await fetch('http://localhost:1337/api/auth/local/register', { // usar variable de entorno y ver por qué no funciona
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                username: values.username,
+                email: values.email,
+                password: values.password
+              })
             })
-          })
-            .then(res => res.json())
-            .catch(error => console.error('Error:', error))
+
+            if (response.ok) {
+              window.open('https://buy.stripe.com/test_28o9CX2c4ekUeze3cc', '_self')
+            } else {
+              console.error('Error en la solicitud POST a la API')
+            }
+
             resetForm()
+          } catch {
+            console.error('Error:', error);
+          }
         }
       }
     >
