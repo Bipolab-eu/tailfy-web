@@ -4,43 +4,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik"
 import * as Yup from 'yup'
 
 export default function SignUp() {
-  // const [checked, setChecked] = useState(false)
-  // const [step, setStep] = useState(0)
-  // const [loading, setLoading] = useState(false)
-  // const price = props[0].unit_amount / 100
-
-  /* async function handleSubmit(e) {
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    const formValues = Object.fromEntries(formData.entries())
-
-    try {
-      setLoading(true)
-      if (step === 1) {
-        const response = await fetch('/api/create-order', {
-          method: 'POST',
-          body: JSON.stringify({ ...formValues, priceId: props[0].id })
-        })
-
-        const { url } = await response.json()
-        window.location.href = url
-      } else {
-        const response = await fetch('http://localhost:1337/api/users', {
-          method: 'POST',
-          body: JSON.stringify({ ...formValues, role: 1 }),
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        })
-        setStep(1)
-
-      }
-    } catch (error) {
-      console.error('Error en crear el usuario:', error)
-    } finally {
-      setLoading(false)
-    }
-  } */
 
   return (
     <Formik
@@ -66,7 +29,7 @@ export default function SignUp() {
       onSubmit={
         async (values, { resetForm }) => {
           try {
-            const response = await fetch('http://localhost:1337/api/auth/local/register', { // usar variable de entorno y ver por qué no funciona
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/local/register`, {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +42,7 @@ export default function SignUp() {
             })
 
             if (response.ok) {
-              window.open('https://buy.stripe.com/test_28o9CX2c4ekUeze3cc', '_self')
+              window.open(`https://buy.stripe.com/${process.env.NEXT_PUBLIC_PAYMENT_PLATFORM}?prefilled_email=${values.email}`, '_self')
             } else {
               console.error('Error en la solicitud POST a la API')
             }
