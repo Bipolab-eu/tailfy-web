@@ -57,15 +57,15 @@ export default function SignUp () {
             .string()
             .email('Invalid email address')
             .required('Email required'),
-          password: Yup // Mejorar esta validación, debería de tener números y letras?
+          password: Yup
             .string()
-            .required('Campo obligatorio').min(6, 'Tu contraseña debe de tener como mínimo 6 carácteres.').matches(/[a-zA-Z]/, 'Password can only contain Latin letters.')
+            .required('Campo obligatorio').min(6, 'Tu contraseña debe de tener como mínimo 6 carácteres.').matches(/[a-zA-Z]/, 'Añade letras a tu contraseña')
         })
       }
 
       onSubmit={
         async (values, { resetForm }) => {
-          await fetch('http://localhost:1337/api/auth/local/register', {
+          await fetch(`${process.env.API_URL}/api/auth/local/register`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
