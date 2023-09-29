@@ -37,13 +37,10 @@ export default function SignUp() {
           );
 
           if (response.ok) {
-            paymentButton.setAttribute("data-email", values.email);
-            paymentButton.click();
-
-            // window.open(
-            //   `https://buy.stripe.com/${process.env.NEXT_PUBLIC_PAYMENT_PLATFORM}?prefilled_email=${values.email}`,
-            //   "_self"
-            // );
+            window.open(
+              `https://buy.stripe.com/${process.env.NEXT_PUBLIC_PAYMENT_KEY}?prefilled_email=${values.email}`,
+              "_self"
+            );
           } else {
             console.error("Error en la solicitud POST a la API");
           }
@@ -102,12 +99,6 @@ export default function SignUp() {
           >
             Crear Cuenta
           </button>
-          <button
-            type="button"
-            className="SS_ProductCheckout hidden"
-            data-id="2"
-            data-url="http://localhost:1337"
-          />
         </Form>
       </section>
     </Formik>
